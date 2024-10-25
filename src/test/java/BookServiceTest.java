@@ -3,10 +3,13 @@ import org.example.book.BookDAO;
 import org.example.exception.DAOException;
 import org.example.exception.ServiceException;
 import org.example.services.BookService;
-import org.example.services.BookServiceImpl;
+import org.example.services.MyBatisBookService; // Updated import
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -18,7 +21,7 @@ public class BookServiceTest {
     @Before
     public void setUp() {
         bookDAO = Mockito.mock(BookDAO.class);
-        bookService = new BookServiceImpl(bookDAO);
+        bookService = new MyBatisBookService(bookDAO); // Updated to MyBatis service
     }
 
     @Test
@@ -45,10 +48,23 @@ public class BookServiceTest {
         assertNotNull("Book should not be null", retrievedBook);
         assertEquals("Sample Title", retrievedBook.getTitle());
     }
+
     @Test
     public void testDeleteBook() throws ServiceException, DAOException {
         bookService.deleteBook(9L);
 
         verify(bookDAO, times(1)).delete(9L);
+    }
+
+    @Test
+    public void testGetAllBooks() throws ServiceException, DAOException {
+        List<Book> books = new ArrayList<>();
+
+        when(bookDAO.findAll()).thenReturn(books);
+
+        List<Book> retrievedBooks = bookService.getAllBooks();
+
+        assertNotNull(retrievedBooks);
+        assertEquals(books.size(), retrievedBooks.size());
     }
 }

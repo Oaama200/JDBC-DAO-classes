@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface AuthorService {
 
-
     // Author-related methods
     Author getAuthorById(Long id) throws ServiceException;
     List<Author> getAllAuthors() throws ServiceException;

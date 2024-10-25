@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.BookMapper">
+
+    <!-- Result Map for Book -->
+    <resultMap id="BookResultMap" type="org.example.book.Book">
+        <id property="bookId" column="book_id"/>
+        <result property="isbn" column="isbn"/>
+        <result property="title" column="title"/>
+        <result property="publicationYear" column="publication_year"/>
+        <result property="editionNumber" column="edition_number"/>
+    </resultMap>
+
+    <!-- Select by ID -->
+    <select id="findById" parameterType="long" resultMap="BookResultMap">
+        SELECT * FROM book WHERE book_id = #{id}
+    </select>
+
+    <!-- Select all books -->
+    <select id="findAll" resultMap="BookResultMap">
+        SELECT * FROM book
+    </select>
+
+    <!-- Insert new book -->
+    <insert id="insert" parameterType="org.example.book.Book" useGeneratedKeys="true" keyProperty="bookId">
+        INSERT INTO book (isbn, title, publication_year, edition_number)
+        VALUES (#{isbn}, #{title}, #{publicationYear}, #{editionNumber})
+    </insert>
+
+    <!-- Update existing book -->
+    <update id="update" parameterType="org.example.book.Book">
+        UPDATE book
+        SET isbn = #{isbn}, title = #{title}, publication_year = #{publicationYear}, edition_number = #{editionNumber}
+        WHERE book_id = #{bookId}
+    </update>
+
+    <!-- Delete book by ID -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM book WHERE book_id = #{id}
+    </delete>
+</mapper>

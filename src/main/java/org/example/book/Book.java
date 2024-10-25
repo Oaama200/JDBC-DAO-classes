@@ -1,10 +1,12 @@
 package org.example.book;
 
+import java.time.Year;
+
 public class Book {
     private Long bookId;
     private String isbn;
     private String title;
-    private int publicationYear;
+    private Year publicationYear;
     private int editionNumber;
     public Long getBookId() {
         return bookId;
@@ -29,11 +31,11 @@ public class Book {
         this.title = title;
     }
 
-    public int getPublicationYear() {
+    public Year getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(int publicationYear) {
+    public void setPublicationYear(Year publicationYear) {
         this.publicationYear = publicationYear;
     }
 

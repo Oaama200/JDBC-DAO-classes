@@ -3,7 +3,7 @@ import org.example.author.AuthorDAO;
 import org.example.exception.DAOException;
 import org.example.services.AuthorService;
 import org.example.exception.ServiceException;
-import org.example.services.AuthorServiceImpl;
+import org.example.services.MyBatisAuthorService; // Updated import
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -22,7 +22,7 @@ public class AuthorServiceTest {
     @Before
     public void setUp() {
         authorDAO = Mockito.mock(AuthorDAO.class);
-        authorService = new AuthorServiceImpl(authorDAO);
+        authorService = new MyBatisAuthorService(authorDAO); // Updated to MyBatis service
     }
 
     @Test
