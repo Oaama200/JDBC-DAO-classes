@@ -4,7 +4,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.type.YearTypeHandler;
 import org.example.author.Author;
+import org.example.author.AuthorAdditionStrategy;
 import org.example.author.AuthorDAO;
+import org.example.author.DefaultAuthorAdditionStrategy;
 import org.example.book.Book;
 import org.example.book.BookDAO;
 import org.example.factory.DAOFactory;
@@ -30,9 +32,11 @@ public class Main {
             BookDAO bookDAO = daoFactory.createBookDAO();
             AuthorDAO authorDAO = daoFactory.createAuthorDAO();
 
+            AuthorAdditionStrategy authorAdditionStrategy = new DefaultAuthorAdditionStrategy(authorDAO);
             // Initialize services
-            AuthorService authorService = new MyBatisAuthorService(authorDAO);
+            AuthorService authorService = new MyBatisAuthorService(authorDAO, authorAdditionStrategy);
             BookService bookService = new MyBatisBookService(bookDAO);
+
 
             // Add a new author
 //            Author newAuthor = new Author();

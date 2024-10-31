@@ -1,6 +1,7 @@
 package org.example.services;
 
 import org.example.author.Author;
+import org.example.author.AuthorAdditionStrategy;
 import org.example.author.AuthorDAO;
 import org.example.exception.DAOException;
 import org.example.exception.ServiceException;
@@ -9,9 +10,11 @@ import java.util.List;
 
 public class MyBatisAuthorService implements AuthorService {
     private final AuthorDAO authorDAO;
+    private final AuthorAdditionStrategy authorAdditionStrategy;
 
-    public MyBatisAuthorService(AuthorDAO authorDAO) {
+    public MyBatisAuthorService(AuthorDAO authorDAO, AuthorAdditionStrategy authorAdditionStrategy) {
         this.authorDAO = authorDAO;
+        this.authorAdditionStrategy = authorAdditionStrategy;
     }
 
     @Override

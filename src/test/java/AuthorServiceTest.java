@@ -1,4 +1,5 @@
 import org.example.author.Author;
+import org.example.author.AuthorAdditionStrategy;
 import org.example.author.AuthorDAO;
 import org.example.exception.DAOException;
 import org.example.services.AuthorService;
@@ -18,11 +19,12 @@ public class AuthorServiceTest {
 
     private AuthorDAO authorDAO;
     private AuthorService authorService;
+    private AuthorAdditionStrategy authorAdditionStrategy;
 
     @Before
     public void setUp() {
         authorDAO = Mockito.mock(AuthorDAO.class);
-        authorService = new MyBatisAuthorService(authorDAO); // Updated to MyBatis service
+        authorService = new MyBatisAuthorService(authorDAO, authorAdditionStrategy); // Updated to MyBatis service
     }
 
     @Test
